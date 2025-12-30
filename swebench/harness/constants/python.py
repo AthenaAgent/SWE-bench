@@ -902,8 +902,27 @@ SPECS_PYDICOM.update(
 
 SPECS_HUMANEVAL = {k: {"python": "3.9", "test_cmd": "python"} for k in ["1.0"]}
 
+SPECS_ANSIBLE = {
+    None: {
+        "python": "3.12",
+        "packages": "requirements.txt",
+        "install": "python -m pip install -e .",
+        "pip_packages": [
+            "pytest>=7.0.0",
+            "pytest-mock",
+            "pytest-xdist",
+            "pyyaml",
+            "jinja2",
+            "cryptography",
+            "packaging",
+        ],
+        "test_cmd": TEST_PYTEST,
+    }
+}
+
 # Constants - Task Instance Instllation Environment
 MAP_REPO_VERSION_TO_SPECS_PY = {
+    "ansible/ansible": SPECS_ANSIBLE,
     "astropy/astropy": SPECS_ASTROPY,
     "dbt-labs/dbt-core": SPECS_DBT_CORE,
     "django/django": SPECS_DJANGO,
@@ -932,6 +951,7 @@ MAP_REPO_TO_INSTALL_PY = {}
 
 # Constants - Task Instance Requirements File Paths
 MAP_REPO_TO_REQS_PATHS = {
+    "ansible/ansible": ["requirements.txt", "test/lib/ansible_test/_data/requirements/sanity.txt"],
     "dbt-labs/dbt-core": ["dev-requirements.txt", "dev_requirements.txt"],
     "django/django": ["tests/requirements/py3.txt"],
     "matplotlib/matplotlib": [

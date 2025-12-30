@@ -417,7 +417,7 @@ def make_eval_script_list_py(
     )
     test_command = " ".join(
         [
-            MAP_REPO_VERSION_TO_SPECS[instance["repo"]][instance["version"]][
+            MAP_REPO_VERSION_TO_SPECS[instance["repo"]][instance.get("version")][
                 "test_cmd"
             ],
             *get_test_directives(instance),
