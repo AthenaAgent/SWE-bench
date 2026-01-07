@@ -557,6 +557,62 @@ SPECS_AXIOS = {
 }
 
 
+SPECS_NODEBB = {
+    **{
+        k: {
+            "install": ["npm install"],
+            "test_cmd": "npm test",
+            "docker_specs": {
+                "node_version": "16.20.0",
+            },
+        }
+        for k in [
+            "0495b863a912fbff5749c67e860612b91825407c",
+            "2c59007b1005cd5cd14cbb523ca5229db1fd2dd8", 
+            "4fbcfae8b15e4ce5d132c408bca69ebb9cf146ed",
+            "89631a1cdb318276acb48860c5d78077211397c6",
+            "d59a5728dfc977f44533186ace531248c2917516",
+            "f2cf3cbd463b7ad942381f1c6d077626485a1e9e",
+            "nan",
+            "latest",
+        ]
+    }
+}
+
+
+SPECS_ELEMENT_WEB = {
+    "latest": {
+        "install": ["npm install"],
+        "test_cmd": "npm test",
+        "docker_specs": {
+            "node_version": "18.20.0",
+        },
+    }
+}
+
+
+SPECS_PROTONMAIL_WEBCLIENTS = {
+    "latest": {
+        "install": ["npm install"],
+        "test_cmd": "npm test",
+        "docker_specs": {
+            "node_version": "18.20.0",
+        },
+    }
+}
+
+
+SPECS_TUTANOTA = {
+    "latest": {
+        "install": ["npm install"],
+        "test_cmd": "npm test",
+        "docker_specs": {
+            "node_version": "18.20.0",
+        },
+    }
+}
+
+
 MAP_REPO_VERSION_TO_SPECS_JS = {
     "Automattic/wp-calypso": SPECS_CALYPSO,
     "chartjs/Chart.js": SPECS_CHART_JS,
@@ -570,6 +626,10 @@ MAP_REPO_VERSION_TO_SPECS_JS = {
     "mrdoob/three.js": SPECS_THREEJS,
     "preactjs/preact": SPECS_PREACT,
     "axios/axios": SPECS_AXIOS,
+    "NodeBB/NodeBB": SPECS_NODEBB,
+    "element-hq/element-web": SPECS_ELEMENT_WEB,
+    "protonmail/webclients": SPECS_PROTONMAIL_WEBCLIENTS,
+    "tutao/tutanota": SPECS_TUTANOTA,
 }
 
 # Constants - Repository Specific Installation Instructions

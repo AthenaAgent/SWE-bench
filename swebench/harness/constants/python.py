@@ -913,12 +913,49 @@ SPECS_ANSIBLE = {
             "pytest-xdist",
             "pyyaml",
             "jinja2",
-            "cryptography",
-            "packaging",
         ],
-        "test_cmd": TEST_PYTEST,
+        "test_cmd": "pytest",
     }
 }
+
+
+SPECS_QUTEBROWSER = {
+    **{
+        k: {
+            "python": "3.9",
+            "packages": "pytest",
+            "install": "python -m pip install -e .",
+            "test_cmd": "pytest",
+        }
+        for k in [
+            "02ad04386d5238fe2d1a1be450df257370de4b6a",
+            "059c6fdc75567943479b23ebca7c07b5e9a7f34c",
+            "2ef375ac784985212b1805e1d0431dc8f1b3c171",
+            "35616345bb8052ea303186706cec663146f0f184",
+            "363c8a7e5ccdf6968fc7ab84a2053ac78036691d",
+            "5149fcda2a9a6fe1d35dfed1bade1444a11ef271",
+            "5fc38aaf22415ab0b70567368332beee7955b367",
+            "9f8e9d96c85c85a605e382f1510bd08563afc566",
+            "a0fd88aac89cde702ec1ba84877234da33adce8a",
+            "c2f56a753b62a190ddb23cd330c257b9cf560d12",
+            "latest",
+        ]
+    }
+}
+
+
+SPECS_OPENLIBRARY = {
+    "latest": {
+        "python": "3.9",
+        "packages": "requirements.txt",
+        "install": "python -m pip install -e .",
+        "test_cmd": "pytest",
+        "pre_install": [
+            "apt-get update && apt-get install -y postgresql-client libpq-dev"
+        ],
+    }
+}
+
 
 # Constants - Task Instance Instllation Environment
 MAP_REPO_VERSION_TO_SPECS_PY = {
@@ -938,11 +975,13 @@ MAP_REPO_VERSION_TO_SPECS_PY = {
     "pylint-dev/pylint": SPECS_PYLINT,
     "pytest-dev/pytest": SPECS_PYTEST,
     "pyvista/pyvista": SPECS_PYVISTA,
+    "qutebrowser/qutebrowser": SPECS_QUTEBROWSER,
     "scikit-learn/scikit-learn": SPECS_SKLEARN,
     "sphinx-doc/sphinx": SPECS_SPHINX,
     "sqlfluff/sqlfluff": SPECS_SQLFLUFF,
     "swe-bench/humaneval": SPECS_HUMANEVAL,
     "sympy/sympy": SPECS_SYMPY,
+    "internetarchive/openlibrary": SPECS_OPENLIBRARY,
 }
 
 # Constants - Repository Specific Installation Instructions
@@ -963,6 +1002,7 @@ MAP_REPO_TO_REQS_PATHS = {
     "pyvista/pyvista": ["requirements_test.txt", "requirements.txt"],
     "sqlfluff/sqlfluff": ["requirements_dev.txt"],
     "sympy/sympy": ["requirements-dev.txt", "requirements-test.txt"],
+    "internetarchive/openlibrary": ["requirements.txt"],
 }
 
 

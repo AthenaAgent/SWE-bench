@@ -35,7 +35,7 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 ENV NVM_DIR /usr/local/nvm
 
 RUN mkdir -p $NVM_DIR
-RUN curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.39.3/install.sh | bash
+RUN curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.39.3/install.sh | NVM_DIR=$NVM_DIR bash
 
 # Install necessary libraries for Chrome
 RUN apt-get update && apt-get install -y \

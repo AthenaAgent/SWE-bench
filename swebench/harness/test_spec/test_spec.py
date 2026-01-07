@@ -186,7 +186,7 @@ def make_test_spec(
     assert instance_image_tag is not None, "instance_image_tag cannot be None"
     instance_id = instance[KEY_INSTANCE_ID]
     repo = instance["repo"]
-    version = instance.get("version")
+    version = instance.get("version", LATEST)
     base_commit = instance["base_commit"]
     problem_statement = instance.get("problem_statement")
     hints_text = instance.get("hints_text")  # Unused
@@ -206,7 +206,17 @@ def make_test_spec(
 
     env_name = "testbed"
     repo_directory = f"/{env_name}"
-    specs = MAP_REPO_VERSION_TO_SPECS[repo][version]
+    
+    # Handle case where version is not found in the specs
+    repo_specs = MAP_REPO_VERSION_TO_SPECS[repo]
+    if version not in repo_specs:
+        # Try to fall back to 'latest', then to the first available version
+        if "latest" in repo_specs:
+            version = "latest"
+        else:
+            version = next(iter(repo_specs.keys()))
+    
+    specs = repo_specs[version]
     docker_specs = specs.get("docker_specs", {})
 
     repo_script_list = make_repo_script_list(

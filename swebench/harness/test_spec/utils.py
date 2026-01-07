@@ -1,5 +1,6 @@
 from swebench.harness.constants import (
     END_TEST_OUTPUT,
+    LATEST,
     MAP_REPO_VERSION_TO_SPECS,
     START_TEST_OUTPUT,
 )
@@ -10,9 +11,19 @@ from swebench.harness.utils import get_modified_files
 
 
 def get_test_cmds(instance) -> list:
-    test_cmd = MAP_REPO_VERSION_TO_SPECS[instance["repo"]][instance.get("version")][
-        "test_cmd"
-    ]
+    repo = instance["repo"]
+    version = instance.get("version", LATEST)
+    
+    # Handle case where version is not found in the specs
+    repo_specs = MAP_REPO_VERSION_TO_SPECS[repo]
+    if version not in repo_specs:
+        # Try to fall back to 'latest', then to the first available version
+        if "latest" in repo_specs:
+            version = "latest"
+        else:
+            version = next(iter(repo_specs.keys()))
+    
+    test_cmd = repo_specs[version]["test_cmd"]
     return [test_cmd] if isinstance(test_cmd, str) else test_cmd
 
 

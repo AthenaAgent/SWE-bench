@@ -5,6 +5,7 @@ import requests
 
 from swebench.harness.constants import (
     SWEbenchInstance,
+    LATEST,
     MAP_REPO_TO_ENV_YML_PATHS,
     MAP_REPO_TO_INSTALL,
     MAP_REPO_TO_REQS_PATHS,
@@ -15,6 +16,24 @@ from swebench.harness.constants import (
     END_TEST_OUTPUT,
     REPO_BASE_COMMIT_BRANCH,
 )
+
+
+def get_test_cmd_for_instance(instance) -> str:
+    """Get test command for an instance with fallback logic"""
+    repo = instance["repo"]
+    version = instance.get("version", LATEST)
+    
+    # Handle case where version is not found in the specs
+    repo_specs = MAP_REPO_VERSION_TO_SPECS[repo]
+    if version not in repo_specs:
+        # Try to fall back to 'latest', then to the first available version
+        if "latest" in repo_specs:
+            version = "latest"
+        else:
+            version = next(iter(repo_specs.keys()))
+    
+    test_cmd = repo_specs[version]["test_cmd"]
+    return test_cmd
 from swebench.harness.utils import get_modified_files, load_cached_environment_yml
 from functools import cache
 
@@ -417,9 +436,7 @@ def make_eval_script_list_py(
     )
     test_command = " ".join(
         [
-            MAP_REPO_VERSION_TO_SPECS[instance["repo"]][instance.get("version")][
-                "test_cmd"
-            ],
+            get_test_cmd_for_instance(instance),
             *get_test_directives(instance),
         ]
     )

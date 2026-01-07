@@ -234,12 +234,52 @@ SPECS_GIN = {
 }
 
 
+SPECS_FLIPT = {
+    "latest": {
+        "docker_specs": {"go_version": "1.21.0"},
+        "install": ["go mod download"],
+        "test_cmd": ["go test ./..."],
+    }
+}
+
+
+SPECS_VULS = {
+    "latest": {
+        "docker_specs": {"go_version": "1.21.0"},
+        "install": ["go mod download"],
+        "test_cmd": ["go test ./..."],
+    }
+}
+
+
+SPECS_TELEPORT = {
+    "latest": {
+        "docker_specs": {"go_version": "1.21.0"},
+        "install": ["go mod download"],
+        "test_cmd": ["go test ./..."],
+    }
+}
+
+
+SPECS_NAVIDROME = {
+    "latest": {
+        "docker_specs": {"go_version": "1.21.0"},
+        "install": ["go mod download"],
+        "test_cmd": ["go test ./..."],
+    }
+}
+
+
 MAP_REPO_VERSION_TO_SPECS_GO = {
     "caddyserver/caddy": SPECS_CADDY,
     "hashicorp/terraform": SPECS_TERRAFORM,
     "prometheus/prometheus": SPECS_PROMETHEUS,
     "gohugoio/hugo": SPECS_HUGO,
     "gin-gonic/gin": SPECS_GIN,
+    "flipt-io/flipt": SPECS_FLIPT,
+    "future-architect/vuls": SPECS_VULS,
+    "gravitational/teleport": SPECS_TELEPORT,
+    "navidrome/navidrome": SPECS_NAVIDROME,
 }
 
 # Constants - Repository Specific Installation Instructions
