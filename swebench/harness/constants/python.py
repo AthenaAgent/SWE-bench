@@ -950,9 +950,6 @@ SPECS_OPENLIBRARY = {
         "packages": "requirements.txt",
         "install": "python -m pip install -e .",
         "test_cmd": "pytest",
-        "pre_install": [
-            "apt-get update && apt-get install -y postgresql-client libpq-dev"
-        ],
     }
 }
 

@@ -18,6 +18,8 @@ curl \
 locales \
 locales-all \
 tzdata \
+postgresql-client \
+libpq-dev \
 && rm -rf /var/lib/apt/lists/*
 
 # Download and install conda
